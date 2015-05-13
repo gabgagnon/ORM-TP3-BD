@@ -1,0 +1,10 @@
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\obj\Debug\Model.csprojResolveAssemblyReference.cache
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\EntityFramework.dll
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.dll
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\EntityFramework.xml
+G:\Documents\Cegep ste-foy !\Session 4\Base de données\Projets VISUAL STUDIO\Model\ConsoleApplication1\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.xml
