@@ -20,7 +20,7 @@ namespace ConsoleApplication1
 
             init.InitializeDatabase(context);
             SectionA(context);
-            SectionB(context);
+            //SectionB(context);
             SectionC(context);
         }
 
@@ -93,27 +93,62 @@ namespace ConsoleApplication1
             }
 
             DateTime TODAY = DateTime.Now;
-            var TutorsAfterToday = appContext.Tutor
-                  .Join(appContext.TutoringSession,
+            var tutorsAfterToday = appContext.Tutor
+                .Join(appContext.TutoringSession,
                    tutorTable => tutorTable.Id,
                    tutoringSessionTable => tutoringSessionTable.TutorId,
-                    (tutorTable, tutoringSessionTable) => new
+                    (tutorTable, tutoringSessionTable)=> new
                     {
                         NomFamilleTutor = tutorTable.LastName,
                         PrenomTutor = tutorTable.FirstName,
-                        LastDate = tutoringSessionTable.DateSession.CompareTo(TODAY)
-
+                        DatesTutor = tutoringSessionTable.DateSession
                     });
+            //.where(
+            //soit je fais un join mais j'ai pas accès au dates directement
+            //soit je fais un groupjoin mais je peux pas déterminer le where à l'extérieur des { }
+            //Après quelques heures j'ai abandonné.
+
             Console.WriteLine();
-            Console.WriteLine("TUTOR LIST WITH HOURS:");
-            foreach (var tutorsItr in TutorsAfterToday)
+            Console.WriteLine("TUTOR LIST OF PLANNED MEETINGS:");
+            foreach (var tutorsItr in tutorsAfterToday)
             {
-                if (tutorsItr.LastDate <= 0)
-                    Console.WriteLine("{0}, {1}", "|" + tutorsItr.NomFamilleTutor, "|" + tutorsItr.PrenomTutor);
+                if (tutorsItr.DatesTutor.CompareTo(TODAY) >= 0) // <-- IMPORTANT
+                Console.WriteLine("{0}, {1}, {2}, {3}", "|" + tutorsItr.NomFamilleTutor, "|" + tutorsItr.PrenomTutor + "h");
             }
 
-            Console.ReadLine();
 
+            //Rencontres triées par date :
+            //Rencontre : date et heure, durée, nom et prénom de l’étudiant aidé.
+
+            var meetingsWithStudents = appContext.HelpedStudent
+                .Join(appContext.TutoringSession,
+                   studentTable => studentTable.Id,
+                   tutoringSessionTable => tutoringSessionTable.HelpedId,
+                    (studentTable, tutoringSessionTable)=> new
+                    {
+                        RencontreEtudiant = tutoringSessionTable.DateSession,
+                        NomFamilleEtudiant = studentTable.LastName,
+                        PrenomEtudiant = studentTable.FirstName,                   
+                    });
+        
+            Console.WriteLine();
+            Console.WriteLine("TUTOR LIST OF PLANNED MEETINGS:");
+            foreach (var tutorsItr in tutorsAfterToday)
+            {
+                if (tutorsItr.DatesTutor.CompareTo(TODAY) >= 0)
+                Console.WriteLine("{0}, {1}, {2}, {3}", "|" + tutorsItr.NomFamilleTutor, "|" + tutorsItr.PrenomTutor + "h");
+            }
+
+            var noMeetingsOnJune2 = appContext.Tutor
+                .Join(appContext.TutoringSession,
+                   tutorsTable => tutorsTable.Id,
+                   tutoringSessionTable => tutoringSessionTable.TutorId,
+                    (tutorsTable, tutoringSessionTable)=> new
+                    {
+                        RencontreEtudiant = tutoringSessionTable.DateSession,
+                        NomFamilleEtudiant = tutoringSessionTable.Helped.LastName,
+                        PrenomEtudiant = tutoringSessionTable.Helped.FirstName
+                    });
 
         }
 
@@ -129,13 +164,21 @@ namespace ConsoleApplication1
             }
 
 
-            HelpedStudent helpedStudentToUpgrade;
-            helpedStudentToUpgrade = appContext.HelpedStudent.Where(hs => hs.FirstName == "Marc" && hs.LastName == "Arsenault").FirstOrDefault<HelpedStudent>();
+            HelpedStudent helpedStudentToDelete;
+            helpedStudentToDelete = appContext.HelpedStudent.Where(hs => hs.FirstName == "Marc" && hs.LastName == "Arsenault").FirstOrDefault<HelpedStudent>();
             TutoringSession TutoringSessionOfHelpedStudentToUpgrade;
-            TutoringSessionOfHelpedStudentToUpgrade = appContext.TutoringSession.Where(s => s.Helped.Id == helpedStudentToUpgrade.Id).FirstOrDefault();
-            appContext.TutoringSession.Remove(TutoringSessionOfHelpedStudentToUpgrade);
-            appContext.HelpedStudent.Remove(helpedStudentToUpgrade);
-            appContext.SaveChanges();
+            TutoringSessionOfHelpedStudentToUpgrade = appContext.TutoringSession.Where(s => s.HelpedId == helpedStudentToDelete.Id).FirstOrDefault();
+
+            using (var ctx = new ProjetContext())
+            {
+                ctx.Entry(TutoringSessionOfHelpedStudentToUpgrade).State = System.Data.Entity.EntityState.Deleted;
+                ctx.SaveChanges();
+            }
+            using (var ctx = new ProjetContext()) { 
+               ctx.Entry(helpedStudentToDelete).State = System.Data.Entity.EntityState.Deleted;
+               ctx.SaveChanges();
+            }
+    
 
 
             HelpedStudent helpedStudentToUpgrade02;
@@ -146,9 +189,13 @@ namespace ConsoleApplication1
             if (tutorToUpgrade != null)
             {
                 TutoringSessionToUpgrade.DateSession = new DateTime(2015, 04, 09, 11, 0, 0);
-                TutoringSessionToUpgrade.TimeSession = 2;
+                TutoringSessionToUpgrade.TimeSession = 11;
             }
-            appContext.SaveChanges();
+            using (var ctx = new ProjetContext())
+            {
+                ctx.Entry(TutoringSessionToUpgrade).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+            }
 
             HelpedStudent helpedStudentToJoin;
             helpedStudentToJoin = appContext.HelpedStudent.Where(hs => hs.FirstName == "Samuel" && hs.LastName == "Vachon").FirstOrDefault<HelpedStudent>();
@@ -162,8 +209,11 @@ namespace ConsoleApplication1
                 Helped = helpedStudentToJoin,
                 Tutor = TutorToJoin
             };
-            appContext.TutoringSession.Add(newTutoringSession);
-            appContext.SaveChanges();
+            using (var ctx = new ProjetContext())
+            {
+                ctx.Entry(newTutoringSession).State = System.Data.Entity.EntityState.Added;
+                ctx.SaveChanges();
+            }
         }
     }
 

@@ -317,6 +317,8 @@ namespace ConsoleApplication1.Repository
             appContext.TutoringSession.Add(newTutoringSession18);
             base.Seed(appContext);
         }
+
+
     }
 
 
