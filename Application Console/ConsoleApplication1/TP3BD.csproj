@@ -58,7 +58,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ProjetContext.cs" />
-    <Compile Include="SinapseApplication.cs" />
+    <Compile Include="TutorProgramRepository\SinapseRepository.cs" />
+    <Compile Include="TutorProgramRepository\SinapseApplication.cs" />
+    <Compile Include="TutorProgramRepository\TutorProgramApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
