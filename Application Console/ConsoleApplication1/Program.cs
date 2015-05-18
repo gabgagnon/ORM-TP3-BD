@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using ConsoleApplication1.Model;
-using ConsoleApplication1.Repository;
+using ConsoleApplication1.Context;
 
 namespace ConsoleApplication1
 {

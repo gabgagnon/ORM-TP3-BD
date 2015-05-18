@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 using ConsoleApplication1.Model;
 
-namespace ConsoleApplication1.Repository
+namespace ConsoleApplication1.Context
 {
     public class ProjetContext : DbContext
     {
@@ -318,13 +318,4 @@ namespace ConsoleApplication1.Repository
             base.Seed(appContext);
         }
     }
-    public class SinapseRepository<T> : IEntityRepository<T> where T : Entity
-        {
-        private/protected readonly DbContext context;
-        public EfEntityRepository(DbContext sinapseContext)
-        {
-        context = sinapseContext;
-        }
-
-
-        }
+}

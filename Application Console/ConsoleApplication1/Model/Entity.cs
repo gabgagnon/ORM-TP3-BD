@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleApplication1.Model
 {
-    class Entity
+    public class Entity
     {
         [Key]
         public int Id { get; set; }
