@@ -317,9 +317,14 @@ namespace ConsoleApplication1.Repository
             appContext.TutoringSession.Add(newTutoringSession18);
             base.Seed(appContext);
         }
-
-
     }
+    public class SinapseRepository<T> : IEntityRepository<T> where T : Entity
+        {
+        private/protected readonly DbContext context;
+        public EfEntityRepository(DbContext sinapseContext)
+        {
+        context = sinapseContext;
+        }
 
 
-}
+        }

@@ -8,9 +8,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleApplication1.Model
 {
-    public class Tutor
+    public class Tutor : Entity
     {
-        public int Id { get; set; }
 
         public string LastName { get; set; }
 

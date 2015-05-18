@@ -7,10 +7,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleApplication1.Model
 {
-    public class TutoringSession
+    public class TutoringSession : Entity
     {
-        [Key]
-        public int Id { get; set; }
 
         public int TutorId { get; set; }
         public virtual Tutor Tutor { get; set; }
