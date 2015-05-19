@@ -73,6 +73,8 @@ namespace ConsoleApplication1.Context
             appContext.Tutor.Add(newTutor6);
             appContext.Tutor.Add(newTutor7);
 
+
+
             HelpedStudent newHelpedStudent1 = new HelpedStudent()
             {
                 LastName = "Arsenault",

@@ -13,7 +13,7 @@ namespace ConsoleApplication1
              T GetById(int id);
              void DeleteAll();
              void Delete(T entity);
-             void Add(T entity);
+             void Insert(T entity);
              void Update(T entity);
         }
 }

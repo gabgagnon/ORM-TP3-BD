@@ -27,3 +27,12 @@ C:\Users\Gabriel Gagnon\Documents\GitHub\ORM-TP3-BD\Application Console\ConsoleA
 C:\Users\Gabriel Gagnon\Documents\GitHub\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Gabriel Gagnon\Documents\GitHub\ORM-TP3-BD\Application Console\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\Gabriel Gagnon\Documents\GitHub\ORM-TP3-BD\Application Console\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.dll
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.dll
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.xml
+C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.xml

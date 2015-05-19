@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1.Context;
 using ConsoleApplication1.Model;
+using System.Data.Entity;
 
 namespace ConsoleApplication1.Context
 {
@@ -23,20 +24,27 @@ namespace ConsoleApplication1.Context
         }
         public T GetById(int id)
         {
-            return null;
+            return sinapseContext.Set<T>().Find(id);
         }
         public void DeleteAll()
         {
+            sinapseContext.Set<T>().RemoveRange(GetAll());
         }
         public void Delete(T entity)
         {
+            sinapseContext.Set<T>().Remove(entity);
+            sinapseContext.SaveChanges();
         }
-        public void Add(T entity)
+        public void Insert(T entity)
         {
-            //SinapseContext.
+            sinapseContext.Set<T>().Add(entity);
+            sinapseContext.SaveChanges();
         }
         public void Update(T entity)
-        { 
+        {
+            sinapseContext.Set<T>().Attach(entity);
+            sinapseContext.Entry(entity).State = EntityState.Modified;
+            sinapseContext.SaveChanges();
         }
     }
 }
