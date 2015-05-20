@@ -36,3 +36,4 @@ C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramew
 C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.dll
 C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.xml
 C:\dev\ORM-TP3-BD\Application Console\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Gabriel Gagnon\Documents\GitHub\ORM-TP3-BD\Application Console\ConsoleApplication1\obj\Debug\TP3BD.csprojResolveAssemblyReference.cache

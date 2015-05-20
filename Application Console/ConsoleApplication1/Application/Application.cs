@@ -16,6 +16,9 @@ namespace ConsoleApplication1.Repository
 
     public Application(ProjetContext context)
         {
+            repoTutors = new BaseRepository<Tutor>(context);
+            repoHelpedStudents = new BaseRepository<HelpedStudent>(context);
+            repoTutoringSessions = new BaseRepository<TutoringSession>(context);
             Seed();
             SectionA();
             SectionB();
@@ -328,7 +331,7 @@ namespace ConsoleApplication1.Repository
         Console.WriteLine("TUTORS:");
         foreach (var tutorItr in tutorsList)
         {
-            Console.WriteLine("{0}, {1}, {2}", "|" + tutorItr.LastName + "|" + tutorItr.FirstName, "|" + tutorItr.EmailAddress);
+            Console.WriteLine("{0}, {1}, {2}", "|" + tutorItr.LastName, "|" + tutorItr.FirstName, "|" + tutorItr.EmailAddress);
         }
 
         var helpedStudentsList = repoHelpedStudents.GetAll();
@@ -348,13 +351,12 @@ namespace ConsoleApplication1.Repository
         Console.ReadLine();
     }
 
-    protected void SectionB()
+    public void SectionB()
     {
        // C'était un désastre durant la remise 2. je ne l'ai pas mis dans la remise 3.
     }
 
-
-    protected void SectionC(ProjetContext appContext)
+    public void SectionC(ProjetContext appContext)
     {
         Tutor tutorToUpgrade;
         tutorToUpgrade = appContext.Tutor.Where(t => t.FirstName == "Gary" && t.LastName == "Bilodeau").FirstOrDefault<Tutor>();
