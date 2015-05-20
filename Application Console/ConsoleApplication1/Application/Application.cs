@@ -13,7 +13,15 @@ namespace ConsoleApplication1.Repository
          private BaseRepository<Tutor> repoTutors;
          private BaseRepository<HelpedStudent> repoHelpedStudents;
          private BaseRepository<TutoringSession> repoTutoringSessions;
-        public Application(ProjetContext context)
+
+    public Application(ProjetContext context)
+        {
+            Seed();
+            SectionA();
+            SectionB();
+            SectionC(context);
+        }
+    public void Seed()
         {
 
             Tutor newTutor1 = new Tutor()
@@ -311,5 +319,88 @@ namespace ConsoleApplication1.Repository
             repoTutoringSessions.Insert(newTutoringSession18);
 
         }
+
+    public void SectionA()
+    {
+
+        var tutorsList = repoTutors.GetAll();
+        Console.WriteLine();
+        Console.WriteLine("TUTORS:");
+        foreach (var tutorItr in tutorsList)
+        {
+            Console.WriteLine("{0}, {1}, {2}", "|" + tutorItr.LastName + "|" + tutorItr.FirstName, "|" + tutorItr.EmailAddress);
+        }
+
+        var helpedStudentsList = repoHelpedStudents.GetAll();
+        Console.WriteLine();
+        Console.WriteLine("HELPED STUDENTS:");
+        foreach (var helpedStudentItr in helpedStudentsList)
+        {
+            Console.WriteLine("{0}, {1}, {2}", "|" + helpedStudentItr.LastName, "|" + helpedStudentItr.FirstName, "|" + helpedStudentItr.EmailAddress);
+        }
+        var tutoringSessionsList = repoTutoringSessions.GetAll();
+        Console.WriteLine();
+        Console.WriteLine("TUTORING SESSIONS:");
+        foreach (var tutoringSessionItr in tutoringSessionsList)
+        {
+            Console.WriteLine("{0}, {1}, {2}, {3}", "|" + tutoringSessionItr.Helped.FirstName, "|" + tutoringSessionItr.Tutor.LastName, "|" + tutoringSessionItr.DateSession, "|" + tutoringSessionItr.LengthSession + "h");
+        }
+        Console.ReadLine();
+    }
+
+    protected void SectionB()
+    {
+       // C'était un désastre durant la remise 2. je ne l'ai pas mis dans la remise 3.
+    }
+
+
+    protected void SectionC(ProjetContext appContext)
+    {
+        Tutor tutorToUpgrade;
+        tutorToUpgrade = appContext.Tutor.Where(t => t.FirstName == "Gary" && t.LastName == "Bilodeau").FirstOrDefault<Tutor>();
+
+        if (tutorToUpgrade != null)
+        {
+            tutorToUpgrade.EmailAddress = "gbilodeau@invalidemail.com";
+            repoTutors.Update(tutorToUpgrade);
+        }
+
+
+        HelpedStudent helpedStudentToDelete;
+        helpedStudentToDelete = appContext.HelpedStudent.Where(hs => hs.FirstName == "Marc" && hs.LastName == "Arsenault").FirstOrDefault<HelpedStudent>();
+        TutoringSession TutoringSessionOfHelpedStudentToDelete;
+        TutoringSessionOfHelpedStudentToDelete = appContext.TutoringSession.Where(s => s.HelpedId == helpedStudentToDelete.Id).FirstOrDefault();
+
+        repoTutoringSessions.Delete(TutoringSessionOfHelpedStudentToDelete);
+        repoHelpedStudents.Delete(helpedStudentToDelete);
+
+
+
+        HelpedStudent helpedStudentToUpgrade02;
+        helpedStudentToUpgrade02 = appContext.HelpedStudent.Where(hs => hs.FirstName == "Marc" && hs.LastName == "Arsenault").FirstOrDefault<HelpedStudent>();
+        TutoringSession TutoringSessionToUpgrade;
+        TutoringSessionToUpgrade = appContext.TutoringSession.Where(ts => ts.Helped.Id == helpedStudentToUpgrade02.Id).FirstOrDefault<TutoringSession>();
+
+        if (tutorToUpgrade != null)
+        {
+            TutoringSessionToUpgrade.DateSession = new DateTime(2015, 04, 09, 11, 0, 0);
+            TutoringSessionToUpgrade.TimeSession = 11;
+            repoTutoringSessions.Update(TutoringSessionToUpgrade);
+        }
+
+        HelpedStudent helpedStudentToJoin;
+        helpedStudentToJoin = appContext.HelpedStudent.Where(hs => hs.FirstName == "Samuel" && hs.LastName == "Vachon").FirstOrDefault<HelpedStudent>();
+        Tutor TutorToJoin;
+        TutorToJoin = appContext.Tutor.Where(hs => hs.FirstName == "Louis" && hs.LastName == "Vézina").FirstOrDefault<Tutor>();
+        TutoringSession newTutoringSession = new TutoringSession()
+        {
+            DateSession = new DateTime(2015, 06, 04, 10, 0, 0),
+            TimeSession = 10,
+            LengthSession = 2,
+            Helped = helpedStudentToJoin,
+            Tutor = TutorToJoin
+        };
+        repoTutoringSessions.Insert(newTutoringSession);
+    }
     }
 }
